@@ -35,7 +35,18 @@ SubProceso instrucTablero(tablero)
         FinPara
     FinPara
 FinSubProceso
+//ejecucion3-pedir una jugada y convertirla en fila y columna Subproceso PedirJugada (Posicion, fila, columna)
+Repetir
+Escribir "Digite una posicion entre 1 y 9:"
+leer posicion
+Hasta Que posicion>=1 y posicion<=9
+
+fila<- Trunc((posicion-1)/3)+1
+columna<-((posicion-1)MOD 3)+1
+FinSubProceso
+//Fin ejecucion 3
 //Fin ejecución
+
 Algoritmo Proyecto3enLínea
 	//Como el bloque de Algoritmo  es el principal (donde se ejecuta el programa)
 	//Aqui llamamos a inicializar el tablero
@@ -45,6 +56,7 @@ Algoritmo Proyecto3enLínea
 	Definir turno Como Entero //VARIABLE que dirá a que jugador le toca
 	Definir finJuego Como Logico //Determinar si gano o no hay mas movimientos
 	//Al tener definido el tablero, ahora se debe crear la matriz con este
+Definir posicion, fila, columna Como Entero
 	Dimension tablero[3,3]
 	InicializarTablero(tablero) //Llamado ejecución parte 1 se crea pero no hay visualización
     jugador <- "O"               //Definimos cual ficha incia el jugador 1 a medida que acabe el turno se sobre escribe esta variable
@@ -59,5 +71,6 @@ Algoritmo Proyecto3enLínea
         // Aqui se llamaria  la función o subproceso para registrar jugada recordar que al tablero se debe devolver coordenadas 
 		//RegistrarJugada(tablero, jugador), se sobre escribira el tablero permitiendo que al vovler a mostrar tablero se actualice
         turnos <- turnos + 1
+PedirJugada(posicion, fila, columna)
 	FinMientras
 FinAlgoritmo
