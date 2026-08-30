@@ -36,14 +36,16 @@ SubProceso instrucTablero(tablero)
     FinPara
 FinSubProceso
 //ejecucion 3 - Pedir una jugada y convertirla en fila y columna 
-SubProceso PedirJugada(posicion, fila, columna)
-Repetir
-Escribir "Digite una posicion entre 1 y 9:"
-leer posicion
-Hasta Que posicion>=1 y posicion<=9
-
-fila<-Trunc((posicion-1)/3)+1
-columna<-((posicion-1) MOD 3)+1
+SubProceso PedirJugada(jugador) //Pendiente realizar un condicional para que no tome numeros menores a 1 o maores a 10 y vuelva apedir numero
+	Definir fila, columna Como Entero
+	Repetir
+		Escribir "Digite una posicion entre 1 y 9:"
+		leer posicion
+	Hasta Que posicion>=1 y posicion<=9
+	
+	fila<-Trunc((posicion-1)/3)+1
+	columna<-((posicion-1) MOD 3)+1
+	
 FinSubProceso
 //fin ejecucion 3
 //Fin ejecución
@@ -56,9 +58,9 @@ Algoritmo Proyecto3enLínea
 	Definir turno Como Entero //VARIABLE que dirá a que jugador le toca
 	Definir finJuego Como Logico //Determinar si gano o no hay mas movimientos
 	//Al tener definido el tablero, ahora se debe crear la matriz con este
-Definir posicion, fila, columna Como Entero
+	Definir posicion, fila, columna Como Entero
 	Dimension tablero[3,3]
-
+	
 	InicializarTablero(tablero) //Llamado ejecución parte 1 se crea pero no hay visualización
     jugador <- "O"               //Definimos cual ficha incia el jugador 1 a medida que acabe el turno se sobre escribe esta variable
     turnos <- 0                  //Inicialización de Turnos puede cambiar
@@ -67,11 +69,11 @@ Definir posicion, fila, columna Como Entero
 	Escribir "A continuación se visualizara el formato numérico a ingresar para escoger la posición a marcar"
 	instrucTablero(tablero)    
 	Escribir "La siguiente imagén es el tablero de 3 en línea, por favor escoja su posición"
-    Mientras juego_terminado = Falso Y turnos < 1 Hacer //como se pruebe jugadas y turnos ya ponerlo <9 actualmente como prueba esta en 1
+    Mientras juego_terminado = Falso Y turnos < 9 Hacer //como se pruebe jugadas y turnos ya ponerlo <9 actualmente como prueba esta en 1
         MostrarTablero(tablero)    //llamada para visualizar como aparece el tablero
         // Aqui se llamaria  la función o subproceso para registrar jugada recordar que al tablero se debe devolver coordenadas 
+		PedirJugada(jugador)
 		//RegistrarJugada(tablero, jugador), se sobre escribira el tablero permitiendo que al vovler a mostrar tablero se actualice
-PedirJugada(posicion, fila, columna)
-turnos <- turnos + 1
+		turnos <- turnos + 1
 	FinMientras
 FinAlgoritmo
