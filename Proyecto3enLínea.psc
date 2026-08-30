@@ -40,6 +40,9 @@ SubProceso PedirJugada(posicion Por Referencia, fila Por Referencia, columna Por
 	Repetir
 		Escribir "Digite una posicion entre 1 y 9:"
 		leer posicion
+		Si posicion < 1 O posicion > 9 Entonces
+			Escribir "La posición Ingresada No es valida"
+		FinSi
 	Hasta Que posicion>=1 y posicion<=9
 	
 	fila<-Trunc((posicion-1)/3)+1
@@ -79,15 +82,17 @@ Algoritmo Proyecto3enLínea
 	Escribir "La siguiente imagén es el tablero de 3 en línea, por favor escoja su posición"
 	Mientras finJuego = Falso Y turnos < 9 Hacer 
         MostrarTablero(tablero) 
-        
-       
         PedirJugada(posicion, fila, columna)
-        
         Si CeldaLibre(tablero, fila, columna) = Verdadero Entonces
-            RegistrarJugada(tablero, fila, columna, jugador)
-            turnos <- turnos + 1
+        RegistrarJugada(tablero, fila, columna, jugador)
+		turnos <- turnos + 1
+		Si jugador = "X" Entonces
+			jugador <- "O"
+		Sino
+			jugador <- "X"
+		FinSi
+	FinSi
         Sino
-            
             Escribir "Esa casilla ya está ocupada. ¡Intenta de nuevo con otra posición!"
         FinSi
     FinMientras
