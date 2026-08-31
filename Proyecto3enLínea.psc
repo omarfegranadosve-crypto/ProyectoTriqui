@@ -60,6 +60,35 @@ SubProceso RegistrarJugada(tablero, fila, columna, jugador)
     tablero[fila,columna] <- jugador
 FinSubProceso
 //Fin ejecución
+Funcion ganador <- HayGanador(tablero,jugador)
+	Definir i Como Entero
+	ganador <- Falso
+	Para i <- 1 Hasta 3 Hacer
+		si tablero(i,1)=jugador y tablero(i,2)=jugador y tablero(i,3)=jugador Entonces
+			ganador<-Verdadero
+		FinSi
+		si tablero(1,i)=jugador y tablero(2,i)=jugador y tablero(3,i)=jugador Entonces
+			ganador<-Verdadero
+		FinSi
+	FinPara 
+	si tablero(1,1)=jugador y tablero(2,2)=jugador y tablero(3,1)=jugador Entonces
+		ganador<-Verdadero
+	FinSi
+	si tablero(1,3)=jugador y tablero(2,2)=jugador y tablero(3,1)=jugador Entonces
+		ganador<-Verdadero
+	FinSi
+FinFuncion
+Funcion lleno <- Tablerolleno(tablero)
+	Definir f,c Como Entero
+	lleno<-Verdadero
+	Para f <-1 Hasta 3 Hacer
+		Para c <- 1 Hasta 3 Hacer
+			si tablero(f,c)="-" Entonces
+				lleno<- Falso
+			FinSi
+		FinPara
+	FinPara
+FinFuncion
 Algoritmo Proyecto3enLínea
 	//Como el bloque de Algoritmo  es el principal (donde se ejecuta el programa)
 	//Aqui llamamos a inicializar el tablero
