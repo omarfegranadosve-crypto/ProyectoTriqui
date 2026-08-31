@@ -1,4 +1,4 @@
-//Ejecución 1 Creación del tablero
+//EjecuciÃ³n 1 CreaciÃ³n del tablero
 SubProceso InicializarTablero(tablero)
     Definir f, c Como Entero
     Para f <- 1 Hasta 3 Hacer
@@ -7,8 +7,8 @@ SubProceso InicializarTablero(tablero)
         FinPara
     FinPara
 FinSubProceso
-//Fin Ejecución parte 1
-//Ejecución 2	Visualización tablero
+//Fin EjecuciÃ³n parte 1
+//EjecuciÃ³n 2	VisualizaciÃ³n tablero
 SubProceso MostrarTablero(tablero)
 	Escribir ""
 	Escribir "  ", tablero[1,1], " | ", tablero[1,2], " | ", tablero[1,3]
@@ -18,14 +18,14 @@ SubProceso MostrarTablero(tablero)
 	Escribir "  ", tablero[3,1], " | ", tablero[3,2], " | ", tablero[3,3]
 	Escribir ""
 FinSubProceso
-//Fin ejecución 2
+//Fin ejecuciÃ³n 2
 //Ejecucion Instructivo
 SubProceso instrucTablero(tablero)
 	Definir c Como Entero
 	c<-1
 	Escribir " ---+---+---"
 	Para i <- 1 Hasta 3 Con Paso 1 Hacer
-		Mostrar  " | ", c , " | ", c+1, " | ", c+2 //Explicación de la numeración a llamar
+		Mostrar  " | ", c , " | ", c+1, " | ", c+2 //ExplicaciÃ³n de la numeraciÃ³n a llamar
 		Escribir " ---+---+---"
 		c=c+3
 	FinPara
@@ -41,7 +41,7 @@ SubProceso PedirJugada(posicion Por Referencia, fila Por Referencia, columna Por
 		Escribir "Digite una posicion entre 1 y 9:"
 		leer posicion
 		Si posicion < 1 O posicion > 9 Entonces
-			Escribir "La posición Ingresada No es valida"
+			Escribir "La posiciÃ³n Ingresada No es valida"
 		FinSi
 	Hasta Que posicion>=1 y posicion<=9
 	
@@ -59,7 +59,7 @@ FinFuncion
 SubProceso RegistrarJugada(tablero, fila, columna, jugador)
     tablero[fila,columna] <- jugador
 FinSubProceso
-//Fin ejecución
+//Fin ejecuciÃ³n
 Funcion ganador <- HayGanador(tablero,jugador)
 	Definir i Como Entero
 	ganador <- Falso
@@ -106,27 +106,27 @@ Funcion gano <- VerificarGanador(tablero, jugador)
         gano <- Verdadero
     FinSi
 FinFuncion
-Algoritmo Proyecto3enLínea
+Algoritmo Proyecto3enLÃ­nea
 	//Como el bloque de Algoritmo  es el principal (donde se ejecuta el programa)
 	//Aqui llamamos a inicializar el tablero
-	//Iniciamos con la definición de nuestras VARIABLES
+	//Iniciamos con la definiciÃ³n de nuestras VARIABLES
 	Definir tablero Como Caracter  //el tablero contendra x,o y los simbolos - 
 	Definir jugador Como Caracter //los juagdorres son los que contienen la X o O por ello caracter
-	Definir turno Como Entero //VARIABLE que dirá a que jugador le toca
+	Definir turno Como Entero //VARIABLE que dirÃ¡ a que jugador le toca
 	Definir finJuego Como Logico //Determinar si gano o no hay mas movimientos
 	//Al tener definido el tablero, ahora se debe crear la matriz con este
 	Definir posicion, fila, columna Como Entero
 	Dimension tablero[3,3]
 	Repetir
 		
-		InicializarTablero(tablero) //Llamado ejecución parte 1 se crea pero no hay visualización
+		InicializarTablero(tablero) //Llamado ejecuciÃ³n parte 1 se crea pero no hay visualizaciÃ³n
 		jugador <- "O"               //Definimos cual ficha incia el jugador 1 a medida que acabe el turno se sobre escribe esta variable
-		turnos <- 0                  //Inicialización de Turnos puede cambiar
-		finJuego <- Falso    //´para crear el ciclo  mientras que nadie gane no termine o a menos que lo obliguen a terminar
-		Escribir "Bienvenido al Juego de 3 en Línea"
-		Escribir "A continuación se visualizara el formato numérico a ingresar para escoger la posición a marcar"
+		turnos <- 0                  //InicializaciÃ³n de Turnos puede cambiar
+		finJuego <- Falso    //Â´para crear el ciclo  mientras que nadie gane no termine o a menos que lo obliguen a terminar
+		Escribir "Bienvenido al Juego de 3 en LÃ­nea"
+		Escribir "A continuaciÃ³n se visualizara el formato numÃ©rico a ingresar para escoger la posiciÃ³n a marcar"
 		instrucTablero(tablero)    
-		Escribir "La siguiente imagén es el tablero de 3 en línea, por favor escoja su posición"
+		Escribir "La siguiente imagÃ©n es el tablero de 3 en lÃ­nea, por favor escoja su posiciÃ³n"
 		Mientras finJuego = Falso Y turnos < 9 Hacer 
 			MostrarTablero(tablero) 
 			PedirJugada(posicion, fila, columna)
@@ -134,7 +134,7 @@ Algoritmo Proyecto3enLínea
 				RegistrarJugada(tablero, fila, columna, jugador)
 				turnos <- turnos + 1
 			SiNo
-				Escribir "Esa casilla ya está ocupada. ¡Intenta de nuevo con otra posición!"
+				Escribir "Esa casilla ya estÃ¡ ocupada. Â¡Intenta de nuevo con otra posiciÃ³n!"
 				
 			FinSi
 			RegistrarJugada(tablero, fila, columna, jugador)
@@ -142,19 +142,22 @@ Algoritmo Proyecto3enLínea
 				MostrarTablero(tablero)
                 Escribir "Gana el jugador ", jugador
                 finPartida <- Verdadero
-            Sino
+            SiNo
                 Si TableroLleno(tablero) Entonces
                     MostrarTablero(tablero)
                     Escribir "Empate."
                     finPartida <- Verdadero
 				SiNo
-			Si jugador = "X" Entonces
-				jugador <- "O"
-			Sino
-				jugador <- "X"
-			finsi 
-		    FinSi
+					Si jugador = "X" Entonces
+						jugador <- "O"
+					Sino
+						jugador <- "X"
+					Finsi 
+		    	FinSi
 	        FinSi
+		Si  VerificarGanador(tablero, jugador) = Verdadero Entonces
+			finJuego<-Verdadero
+		FinSi
 		FinMientras
 		Escribir "Desea jugar otra partida? (S/N)"
 		Leer respuesta
