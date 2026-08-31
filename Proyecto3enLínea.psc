@@ -89,6 +89,23 @@ Funcion lleno <- Tablerolleno(tablero)
 		FinPara
 	FinPara
 FinFuncion
+Funcion gano <- VerificarGanador(tablero, jugador)
+    Definir gano Como Logico
+    gano <- Falso
+    
+    // Revisar Filas
+    Si (tablero[1,1]=jugador Y tablero[1,2]=jugador Y tablero[1,3]=jugador) O (tablero[2,1]=jugador Y tablero[2,2]=jugador Y tablero[2,3]=jugador) O (tablero[3,1]=jugador Y tablero[3,2]=jugador Y tablero[3,3]=jugador) Entonces
+        gano <- Verdadero
+    FinSi
+    // Revisar Columnas
+    Si (tablero[1,1]=jugador Y tablero[2,1]=jugador Y tablero[3,1]=jugador) O (tablero[1,2]=jugador Y tablero[2,2]=jugador Y tablero[3,2]=jugador) O (tablero[1,3]=jugador Y tablero[2,3]=jugador Y tablero[3,3]=jugador) Entonces
+        gano <- Verdadero
+    FinSi
+    // Revisar Diagonales
+    Si (tablero[1,1]=jugador Y tablero[2,2]=jugador Y tablero[3,3]=jugador) O (tablero[1,3]=jugador Y tablero[2,2]=jugador Y tablero[3,1]=jugador) Entonces
+        gano <- Verdadero
+    FinSi
+FinFuncion
 Algoritmo Proyecto3enLínea
 	//Como el bloque de Algoritmo  es el principal (donde se ejecuta el programa)
 	//Aqui llamamos a inicializar el tablero
@@ -101,6 +118,7 @@ Algoritmo Proyecto3enLínea
 	Definir posicion, fila, columna Como Entero
 	Dimension tablero[3,3]
 	Repetir
+		
 		InicializarTablero(tablero) //Llamado ejecución parte 1 se crea pero no hay visualización
 		jugador <- "O"               //Definimos cual ficha incia el jugador 1 a medida que acabe el turno se sobre escribe esta variable
 		turnos <- 0                  //Inicialización de Turnos puede cambiar
@@ -117,14 +135,28 @@ Algoritmo Proyecto3enLínea
 				turnos <- turnos + 1
 			SiNo
 				Escribir "Esa casilla ya está ocupada. ¡Intenta de nuevo con otra posición!"
+				
 			FinSi
+			RegistrarJugada(tablero, fila, columna, jugador)
+			Si VerificarGanador(tablero, jugador) Entonces
+				MostrarTablero(tablero)
+                Escribir "Gana el jugador ", jugador
+                finPartida <- Verdadero
+            Sino
+                Si TableroLleno(tablero) Entonces
+                    MostrarTablero(tablero)
+                    Escribir "Empate."
+                    finPartida <- Verdadero
+				SiNo
 			Si jugador = "X" Entonces
 				jugador <- "O"
 			Sino
 				jugador <- "X"
 			finsi 
+		    FinSi
+	        FinSi
 		FinMientras
-		Escribir "Desea jugar otra partida? (Si/No)"
+		Escribir "Desea jugar otra partida? (S/N)"
 		Leer respuesta
-	Hasta Que respuesta = "No"
+	Hasta Que  respuesta = "N" O respuesta = "n"
 FinAlgoritmo
